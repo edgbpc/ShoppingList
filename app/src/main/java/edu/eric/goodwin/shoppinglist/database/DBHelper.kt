@@ -9,7 +9,7 @@ import org.jetbrains.anko.db.*
 class DBHelper(context: Context): ManagedSQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     override fun onCreate(db: SQLiteDatabase?) {
         db?.createTable(ShoppingListsSchema.NAME, true,
-            ShoppingListsSchema.Cols.iID to INTEGER + PRIMARY_KEY,
+            ShoppingListsSchema.Cols.iID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
             ShoppingListsSchema.Cols.cITEM to TEXT,
             ShoppingListsSchema.Cols.iCOUNT to INTEGER,
             ShoppingListsSchema.Cols.cSTORE to TEXT,
@@ -24,7 +24,7 @@ class DBHelper(context: Context): ManagedSQLiteOpenHelper(context, DB_NAME, null
 
 
     companion object {
-        const val DB_NAME = "Lists.db"
+        const val DB_NAME = "ShoppingList.sqLite"
         const val DB_VERSION = 1
     }
 
