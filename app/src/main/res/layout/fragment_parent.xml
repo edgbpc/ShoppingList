@@ -2,9 +2,10 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mainContainer"
+        android:id="@+id/parentContainer"
 >
     <android.support.constraint.ConstraintLayout
             android:layout_height="wrap_content"
@@ -37,14 +38,12 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     <android.support.v7.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/RecyclerView"
+            android:id="@+id/parentListingFragmentView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/parent_list_layout"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
 
-
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+    />
 
 </android.support.constraint.ConstraintLayout>
