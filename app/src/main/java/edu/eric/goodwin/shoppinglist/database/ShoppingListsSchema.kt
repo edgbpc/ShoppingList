@@ -3,7 +3,7 @@ package edu.eric.goodwin.shoppinglist.database
 import android.provider.BaseColumns
 
 object ShoppingListsSchema {
-    const val NAME = "list"
+    const val TABLE_NAME = "Shopping List"
     object Cols {
         // Following naming convention I use at work.  i = int, c = character, l = boolean
 

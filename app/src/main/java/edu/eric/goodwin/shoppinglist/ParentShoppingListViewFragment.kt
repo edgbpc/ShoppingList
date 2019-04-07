@@ -68,6 +68,8 @@ class ParentShoppingListViewFragment: Fragment() {
 
             override fun onClick(v: View?) {
                 Log.d("RecyclerView", "CLick!")
+
+                val position = parentShoppingListFragmentView.getChildLayoutPosition(this.view)
                 childShoppingListViewFragment = getActivity()?.supportFragmentManager?.findFragmentById(R.id.fragmentContainer) as? ChildShoppingListViewFragment
 
                 if (childShoppingListViewFragment == null) {

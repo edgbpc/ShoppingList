@@ -7,7 +7,7 @@ import org.jetbrains.anko.db.*
 
 class DBHelper(context: Context): ManagedSQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.createTable(ShoppingListsSchema.NAME, true,
+        db?.createTable(ShoppingListsSchema.TABLE_NAME, true,
             ShoppingListsSchema.Cols.iID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
             ShoppingListsSchema.Cols.cITEM to TEXT,
             ShoppingListsSchema.Cols.iCOUNT to INTEGER,
