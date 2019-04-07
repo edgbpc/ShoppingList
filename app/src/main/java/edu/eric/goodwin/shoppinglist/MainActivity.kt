@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.View
 
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.fab
 
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,8 +27,16 @@ class MainActivity : AppCompatActivity() {
         val fab: View = findViewById(R.id.fab)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            // proof of concept.. can i load a new fragment into the fragmentContainer?
+            parentShoppingListViewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ParentShoppingListViewFragment
+            if (parentShoppingListViewFragment == null) {
+                parentShoppingListViewFragment = ParentShoppingListViewFragment()
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.fragmentContainer, parentShoppingListViewFragment!!)
+                    .commit()
+            }
+            // proof of concept .. success
+
         }
     }
 

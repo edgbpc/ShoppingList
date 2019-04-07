@@ -35,6 +35,7 @@ class ParentShoppingListViewFragment: Fragment() {
     }
 
     inner class ParentListAdapter(val dummyData: ArrayList<String>): RecyclerView.Adapter<ParentListAdapter.ParentListHolder>() {
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParentListHolder {
             val inflater = LayoutInflater.from(activity)
             val itemView = inflater.inflate(R.layout.parent_list_layout, parent, false)
@@ -46,11 +47,12 @@ class ParentShoppingListViewFragment: Fragment() {
         }
 
         override fun onBindViewHolder(holder: ParentListHolder, position: Int) {
+            holder.titleTextView.text = dummyData[position]
         }
 
         inner class ParentListHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-            private val titleTextView: TextView = itemView.findViewById(R.id.storeTitleView)
-            private val placeholderTextView: TextView = itemView.findViewById(R.id.placeholderTextview)
+            val titleTextView: TextView = itemView.findViewById(R.id.storeTitleView)
+            val placeholderTextView: TextView = itemView.findViewById(R.id.placeholderTextview)
 
         }
     }
