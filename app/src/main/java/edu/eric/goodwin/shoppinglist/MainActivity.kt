@@ -23,12 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fab: View = findViewById(R.id.fab)
-
-        fab.setOnClickListener { view ->
 
 
-        }
         parentShoppingListViewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ParentShoppingListViewFragment
         if (parentShoppingListViewFragment == null) {
             parentShoppingListViewFragment = ParentShoppingListViewFragment()

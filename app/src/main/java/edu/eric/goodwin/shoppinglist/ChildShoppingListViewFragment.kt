@@ -8,13 +8,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_child.*
 import kotlinx.android.synthetic.main.fragment_parent.*
 
 class ChildShoppingListViewFragment: Fragment() {
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_parent, container, false)
+        val view = inflater.inflate(R.layout.fragment_child, container, false)
 
         return view
     }
@@ -22,14 +24,23 @@ class ChildShoppingListViewFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         val moreDummyData: ArrayList<String> = ArrayList()
 
         for (i in 1..100){
             moreDummyData.add("moreDummyData " + i)
         }
 
-        parentShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
-        parentShoppingListFragmentView.adapter = ChildListAdapter(moreDummyData)
+        childFab.setOnClickListener { view ->
+            val fm = getActivity()!!.supportFragmentManager
+            val dialogFragment = dialogBox()
+            dialogFragment.show(fm, "dialog_box")
+
+        }
+
+        childShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
+        childShoppingListFragmentView.adapter = ChildListAdapter(moreDummyData)
 
     }
 

@@ -18,10 +18,10 @@ class ParentShoppingListViewFragment: Fragment() {
     private var childShoppingListViewFragment: ChildShoppingListViewFragment? = null
 
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_parent, container, false)
-
         return view
     }
 
@@ -33,6 +33,16 @@ class ParentShoppingListViewFragment: Fragment() {
         for (i in 1..100){
             dummyData.add("dummyData " + i)
         }
+
+
+
+        fab.setOnClickListener { view ->
+            val fm = getActivity()!!.supportFragmentManager
+            val dialogFragment = dialogBox()
+            dialogFragment.show(fm, "dialog_box_call_from_parent")
+
+        }
+
 
         parentShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
         parentShoppingListFragmentView.adapter = ParentListAdapter(dummyData)
@@ -64,13 +74,13 @@ class ParentShoppingListViewFragment: Fragment() {
 
             }
 
-
-
             override fun onClick(v: View?) {
                 Log.d("RecyclerView", "CLick!")
 
                 val position = parentShoppingListFragmentView.getChildLayoutPosition(this.view)
                 childShoppingListViewFragment = getActivity()?.supportFragmentManager?.findFragmentById(R.id.fragmentContainer) as? ChildShoppingListViewFragment
+
+
 
                 if (childShoppingListViewFragment == null) {
                     childShoppingListViewFragment = ChildShoppingListViewFragment()

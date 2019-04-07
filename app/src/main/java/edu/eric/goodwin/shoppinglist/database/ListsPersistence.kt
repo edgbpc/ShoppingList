@@ -139,7 +139,7 @@ class ListsPersistence(private val dbHelper: DBHelper) {
         }
     }
 
-     
+
 
 
 }

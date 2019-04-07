@@ -6,10 +6,21 @@
         android:layout_height="match_parent"
         tools:context=".ChildShoppingListViewFragment"
 >
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="243dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:id="@+id/childFab"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="44dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:focusable="true"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/childRecyclerView"
+            android:id="@+id/childShoppingListFragmentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

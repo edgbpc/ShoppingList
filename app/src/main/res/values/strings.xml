@@ -5,4 +5,9 @@
     <string name="placeholder_text_view">Placeholder</string>
     <string name="quantity_text_view">Quantity</string>
     <string name="item_title_view">Item</string>
+    <string name="name">Name</string>
+    <string name="Quantity">Quantity</string>
+    <string name="placeholder">placeholder</string>
+    <string name="Cancel">Button</string>
+    <string name="Creeate">Create</string>
 </resources>
