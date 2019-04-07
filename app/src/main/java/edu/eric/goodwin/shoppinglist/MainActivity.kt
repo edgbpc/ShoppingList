@@ -26,25 +26,15 @@ class MainActivity : AppCompatActivity() {
         val fab: View = findViewById(R.id.fab)
 
         fab.setOnClickListener { view ->
-            // proof of concept.. can i load a new fragment into the fragmentContainer?
-            parentShoppingListViewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ParentShoppingListViewFragment
-            if (parentShoppingListViewFragment == null) {
-                parentShoppingListViewFragment = ParentShoppingListViewFragment()
-                supportFragmentManager.beginTransaction()
-                    .add(R.id.fragmentContainer, parentShoppingListViewFragment!!)
-                    .commit()
-            }
 
-//            childShoppingListViewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ChildShoppingListViewFragment
-//            if (childShoppingListViewFragment == null) {
-//                childShoppingListViewFragment = ChildShoppingListViewFragment()
-//                supportFragmentManager.beginTransaction()
-//                    .add(R.id.fragmentContainer, childShoppingListViewFragment!!)
-//                    .commit()
-//            }
-            // pr
-            // proof of concept .. success
 
+        }
+        parentShoppingListViewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ParentShoppingListViewFragment
+        if (parentShoppingListViewFragment == null) {
+            parentShoppingListViewFragment = ParentShoppingListViewFragment()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragmentContainer, parentShoppingListViewFragment!!)
+                .commit()
         }
     }
 
