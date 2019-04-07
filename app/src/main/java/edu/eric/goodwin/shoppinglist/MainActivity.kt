@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var parentShoppingListViewFragment: ParentShoppingListViewFragment? = null
-    private var childShoppingListViewFragment: ChildShoppingListViewFragment? = null
 
     private var shoppingListModel: ShoppingListModel? = ShoppingListModel()
 
@@ -35,6 +34,15 @@ class MainActivity : AppCompatActivity() {
                     .add(R.id.fragmentContainer, parentShoppingListViewFragment!!)
                     .commit()
             }
+
+//            childShoppingListViewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ChildShoppingListViewFragment
+//            if (childShoppingListViewFragment == null) {
+//                childShoppingListViewFragment = ChildShoppingListViewFragment()
+//                supportFragmentManager.beginTransaction()
+//                    .add(R.id.fragmentContainer, childShoppingListViewFragment!!)
+//                    .commit()
+//            }
+            // pr
             // proof of concept .. success
 
         }

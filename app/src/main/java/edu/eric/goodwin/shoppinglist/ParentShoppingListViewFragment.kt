@@ -1,6 +1,7 @@
 package edu.eric.goodwin.shoppinglist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,9 @@ import kotlinx.android.synthetic.main.fragment_parent.*
 
 
 class ParentShoppingListViewFragment: Fragment() {
+
+    private var childShoppingListViewFragment: ChildShoppingListViewFragment? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -50,11 +54,30 @@ class ParentShoppingListViewFragment: Fragment() {
             holder.titleTextView.text = dummyData[position]
         }
 
-        inner class ParentListHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        inner class ParentListHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
             val titleTextView: TextView = itemView.findViewById(R.id.storeTitleView)
-            val placeholderTextView: TextView = itemView.findViewById(R.id.placeholderTextview)
+            private var view: View = itemView
+
+            init {
+                itemView.setOnClickListener(this)
+            }
+
+            override fun onClick(v: View?) {
+                Log.d("RecyclerView", "CLick!")
+                childShoppingListViewFragment = getActivity()?.supportFragmentManager?.findFragmentById(R.id.fragmentContainer) as? ChildShoppingListViewFragment
+
+                if (childShoppingListViewFragment == null) {
+                    childShoppingListViewFragment = ChildShoppingListViewFragment()
+                    getActivity()?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.fragmentContainer, childShoppingListViewFragment!!)
+                        ?.addToBackStack(null)
+                        ?.commit()
+            }
+
+            }
 
         }
+
     }
 
 
