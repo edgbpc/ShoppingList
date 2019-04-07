@@ -1,14 +1,15 @@
 package edu.eric.goodwin.shoppinglist
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_parent.*
+
 
 class ParentShoppingListViewFragment: Fragment() {
 
@@ -28,9 +29,8 @@ class ParentShoppingListViewFragment: Fragment() {
             dummyData.add("dummyData " + i)
         }
 
-
-        parentListingFragmentView.layoutManager = LinearLayoutManager(this.activity)
-        parentListingFragmentView.adapter = ParentListAdapter(dummyData)
+        parentShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
+        parentShoppingListFragmentView.adapter = ParentListAdapter(dummyData)
 
     }
 

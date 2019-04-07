@@ -3,7 +3,6 @@ package edu.eric.goodwin.shoppinglist.database
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.support.v4.app.NotificationCompat
 import org.jetbrains.anko.db.*
 
 class DBHelper(context: Context): ManagedSQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
