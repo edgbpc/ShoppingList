@@ -16,14 +16,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var parentShoppingListViewFragment: ParentShoppingListViewFragment? = null
-    private var shoppingListModel: ShoppingListModel? = null
-
+    private lateinit var model: ShoppingListModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        shoppingListModel = ShoppingListModel(this)
+        model = ShoppingListModel(this)
+
+       var _test1 = model.persistence.getAllLists()
+
+
 
 
 

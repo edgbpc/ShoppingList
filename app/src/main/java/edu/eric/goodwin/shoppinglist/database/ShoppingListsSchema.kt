@@ -12,7 +12,7 @@ object ShoppingListsSchema {
         const val iCOUNT = "iCount"
         const val cSTORE = "cStore"
         const val iPRICE = "iPrice"
-        const val lPURCHASED = "lPurchased"
+        const val lPURCHASED = "iPurchased" //boolean
 
     }
 }

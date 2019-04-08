@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.fragment_child.*
 
 class ChildShoppingListViewFragment: Fragment() {
 
+    var data: String = String()
+
+    private lateinit var model: ShoppingListModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -22,14 +26,15 @@ class ChildShoppingListViewFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model = ShoppingListModel(getActivity()!!)
 
+        var data = model.persistence.shoppingListFor(data)
 
-
-        val moreDummyData: ArrayList<String> = ArrayList()
-
-        for (i in 1..100){
-            moreDummyData.add("moreDummyData " + i)
-        }
+//        val moreDummyData: ArrayList<String> = ArrayList()
+//
+//        for (i in 1..100){
+//            moreDummyData.add("moreDummyData " + i)
+//        }
 
         childFab.setOnClickListener { view ->
             val fm = getActivity()!!.supportFragmentManager
@@ -39,11 +44,11 @@ class ChildShoppingListViewFragment: Fragment() {
         }
 
         childShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
-        childShoppingListFragmentView.adapter = ChildListAdapter(moreDummyData)
+        childShoppingListFragmentView.adapter = ChildListAdapter(data!!)
 
     }
 
-    inner class ChildListAdapter(val moreDummyData: ArrayList<String>): RecyclerView.Adapter<ChildListAdapter.ChildListHolder>() {
+    inner class ChildListAdapter(val data: List<ShoppingList>): RecyclerView.Adapter<ChildListAdapter.ChildListHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildListHolder {
             val inflater = LayoutInflater.from(activity)
@@ -52,12 +57,12 @@ class ChildShoppingListViewFragment: Fragment() {
         }
 
         override fun getItemCount(): Int {
-            return moreDummyData.size
+            return data.size
         }
 
         override fun onBindViewHolder(holder: ChildListHolder, position: Int) {
-            holder.itemTextView.text = moreDummyData[position]
-            holder.qtyTextView.text = position.toString()
+            holder.itemTextView.text = data.get(position).cItem
+            holder.qtyTextView.text = data.get(position).iCount.toString()
         }
 
         inner class ChildListHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

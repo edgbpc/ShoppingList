@@ -28,13 +28,12 @@ class dialogBoxFragment: DialogFragment() {
         var nameEditText = view.findViewById(R.id.nameEditText) as EditText
 
 
-
         view.createButton.setOnClickListener {
-
+          super.dismiss()
         }
 
         view.cancelButton.setOnClickListener {
-            Log.d("Cancel Button", "Canel button pressed")
+            Log.d("Cancel Button", "Cancel button pressed")
             super.dismiss()
         }
 

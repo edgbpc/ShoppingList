@@ -17,13 +17,12 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
             select(ShoppingListsSchema.TABLE_NAME)
                 .parseList(object : MapRowParser<ShoppingList> {
                     override fun parseRow(columns: Map<String, Any?>): ShoppingList {
-                        val iId = columns.get(ShoppingListsSchema.Cols.iID) as Int
+                        val iId = columns.get(ShoppingListsSchema.Cols.iID) as Number
                         val cItem = columns.get(ShoppingListsSchema.Cols.cITEM) as String
-                        val iCount = columns.get(ShoppingListsSchema.Cols.iCOUNT) as Int
+                        val iCount = columns.get(ShoppingListsSchema.Cols.iCOUNT) as Number
                         val cStore = columns.get(ShoppingListsSchema.Cols.cSTORE) as String
-                        val iPrice = columns.get(ShoppingListsSchema.Cols.iPRICE) as Int
-                        val lPurchased = columns.get(ShoppingListsSchema.Cols.lPURCHASED) as Boolean
-                        return ShoppingList(iId, cItem, iCount, cStore, iPrice, lPurchased)
+                        val iPrice = columns.get(ShoppingListsSchema.Cols.iPRICE) as Number
+                        return ShoppingList(iId.toInt(), cItem, iCount.toInt(), cStore, iPrice.toInt())
                     }
                 })
         }
@@ -49,8 +48,11 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
                     .parseList(object : MapRowParser<ShoppingList> {
                         override fun parseRow(columns: Map<String, Any?>): ShoppingList {
                             val iId = columns[ShoppingListsSchema.Cols.iID] as Number
+                            val cItem = columns.get(ShoppingListsSchema.Cols.cITEM) as String
+                            val iCount = columns.get(ShoppingListsSchema.Cols.iCOUNT) as Number
                             val cStore = columns[ShoppingListsSchema.Cols.cSTORE] as String
-                            return ShoppingList(iId.toInt(), null, null, cStore, null, null)
+                            val iPrice = columns.get(ShoppingListsSchema.Cols.iPRICE) as Number
+                            return ShoppingList(iId.toInt(), cItem, iCount.toInt(), cStore, iPrice.toInt())
                         }
                     })
             }
@@ -68,24 +70,24 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
                         val iCount = columns[ShoppingListsSchema.Cols.iCOUNT] as Number
                         val cStore = columns[ShoppingListsSchema.Cols.cSTORE] as String
                         val iPrice = columns[ShoppingListsSchema.Cols.iPRICE] as Number
-                        val lPurchased = columns[ShoppingListsSchema.Cols.lPURCHASED] as Boolean
-                        return ShoppingList(iId.toInt(), cItem, iCount.toInt(), cStore, iPrice.toInt(), lPurchased)
+                        return ShoppingList(iId.toInt(), cItem, iCount.toInt(), cStore, iPrice.toInt())
                     }
                 })
         }
 
     }
 
+    //trying to make this return a distinct list but couldn't find any combination anko liked
 
     fun getParentLists(): List<ShoppingList> {
         return dbHelper.use {
             select(ShoppingListsSchema.TABLE_NAME)
-                .parseList(object: MapRowParser<ShoppingList> {
+
+               .parseList(object: MapRowParser<ShoppingList> {
                     override fun parseRow(columns: Map<String, Any?>): ShoppingList {
                         val iId = columns[ShoppingListsSchema.Cols.iID] as Number
                         val cStore = columns[ShoppingListsSchema.Cols.cSTORE] as String
-                        return ShoppingList(iId.toInt(), null, null, cStore, null, null
-                        )
+                        return ShoppingList(iId.toInt(), null, null, cStore, null)
                     }
                 })
         }
@@ -105,8 +107,7 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
                     ShoppingListsSchema.Cols.cITEM to list.cItem,
                     ShoppingListsSchema.Cols.cSTORE to list.cStore,
                     ShoppingListsSchema.Cols.iCOUNT to list.iCount.toString(),
-                    ShoppingListsSchema.Cols.iPRICE to list.iPrice,
-                    ShoppingListsSchema.Cols.lPURCHASED to list.lPurchased
+                    ShoppingListsSchema.Cols.iPRICE to list.iPrice
                 )
                 itemInListWith(list.cStore!!)
             } catch (e: SQLiteConstraintException) {
@@ -124,11 +125,10 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
                         val iID = columns[ShoppingListsSchema.Cols.iID] as Number
                         val cItem = columns[ShoppingListsSchema.Cols.cITEM] as String
                         val cStore = columns[ShoppingListsSchema.Cols.cSTORE] as String
-                        val iCount = columns[ShoppingListsSchema.Cols.iCOUNT] as String
-                        val iPrice = columns[ShoppingListsSchema.Cols.iPRICE] as String
-                        val lPurchased = columns[ShoppingListsSchema.Cols.lPURCHASED] as String
+                        val iCount = columns[ShoppingListsSchema.Cols.iCOUNT] as Number
+                        val iPrice = columns[ShoppingListsSchema.Cols.iPRICE] as Number
 
-                        return ShoppingList(iID.toInt(), cItem, iCount.toInt(), cStore, iPrice.toInt(), lPurchased.toBoolean())
+                        return ShoppingList(iID.toInt(), cItem, iCount.toInt(), cStore, iPrice.toInt())
 
                         }
                     })
