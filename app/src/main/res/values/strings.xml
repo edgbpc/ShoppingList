@@ -8,6 +8,6 @@
     <string name="name">Name</string>
     <string name="Quantity">Quantity</string>
     <string name="placeholder">placeholder</string>
-    <string name="Cancel">Button</string>
-    <string name="Creeate">Create</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Create">Create</string>
 </resources>

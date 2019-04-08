@@ -5,6 +5,7 @@ import android.view.View
 
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import edu.eric.goodwin.shoppinglist.database.DBHelper
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,13 +16,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var parentShoppingListViewFragment: ParentShoppingListViewFragment? = null
-
-    private var shoppingListModel: ShoppingListModel? = ShoppingListModel()
+    private var shoppingListModel: ShoppingListModel? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        shoppingListModel = ShoppingListModel(this)
 
 
 
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.fragmentContainer, parentShoppingListViewFragment!!)
                 .commit()
         }
+
+
+
     }
 
 

@@ -10,7 +10,7 @@
     <EditText
             android:text="@string/name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/nameEditView" android:focusable="auto"/>
+            android:layout_height="wrap_content" android:id="@+id/nameEditText" android:focusable="auto"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -18,24 +18,24 @@
         <EditText
                 android:text="@string/Quantity"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/QtyEditView" android:layout_weight="1"
+                android:layout_height="wrap_content" android:id="@+id/QtyEditText" android:layout_weight="1"
                 android:focusable="auto" android:editable="true"/>
         <EditText
                 android:text="@string/placeholder"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/placeholderEditView" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/placeholderEditText" android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <Button
-                android:text="Create"
+                android:text="@string/Create"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/Create" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/createButton" android:layout_weight="1"/>
         <Button
                 android:text="@string/Cancel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/button3" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/cancelButton" android:layout_weight="1"/>
     </LinearLayout>
 </LinearLayout>

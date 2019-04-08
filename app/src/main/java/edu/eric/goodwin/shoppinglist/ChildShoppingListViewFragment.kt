@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_child.*
-import kotlinx.android.synthetic.main.fragment_parent.*
 
 class ChildShoppingListViewFragment: Fragment() {
 
@@ -34,7 +33,7 @@ class ChildShoppingListViewFragment: Fragment() {
 
         childFab.setOnClickListener { view ->
             val fm = getActivity()!!.supportFragmentManager
-            val dialogFragment = dialogBox()
+            val dialogFragment = dialogBoxFragment()
             dialogFragment.show(fm, "dialog_box")
 
         }

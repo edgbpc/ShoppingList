@@ -8,7 +8,7 @@ import org.jetbrains.anko.db.MapRowParser
 import org.jetbrains.anko.db.insertOrThrow
 import org.jetbrains.anko.db.select
 
-class ListsPersistence(private val dbHelper: DBHelper) {
+class ShoppingListsPersistence(private val dbHelper: DBHelper) {
 
 
     //will return entire table
@@ -29,7 +29,7 @@ class ListsPersistence(private val dbHelper: DBHelper) {
         }
     }
 
-    fun createParentItemWith(cStore: String): ShoppingList?{
+    fun createParentItemWith(cStore: String): List<ShoppingList>?{
         return dbHelper.use {
             try {
                 insertOrThrow(ShoppingListsSchema.TABLE_NAME, ShoppingListsSchema.Cols.cSTORE to cStore)
@@ -42,19 +42,15 @@ class ListsPersistence(private val dbHelper: DBHelper) {
         }
 
     //returns a list of items for a parent
-    fun shoppingListFor(listName: String): ShoppingList {
+    fun shoppingListFor(listName: String): List<ShoppingList>? {
             return dbHelper.use {
                 select(ShoppingListsSchema.TABLE_NAME)
                     .whereSimple("${ShoppingListsSchema.Cols.cSTORE} = ?", listName)
-                    .parseSingle(object : MapRowParser<ShoppingList> {
+                    .parseList(object : MapRowParser<ShoppingList> {
                         override fun parseRow(columns: Map<String, Any?>): ShoppingList {
                             val iId = columns[ShoppingListsSchema.Cols.iID] as Number
-                            val cItem = columns[ShoppingListsSchema.Cols.cITEM] as String
-                            val iCount = columns[ShoppingListsSchema.Cols.iCOUNT] as Number
                             val cStore = columns[ShoppingListsSchema.Cols.cSTORE] as String
-                            val iPrice = columns[ShoppingListsSchema.Cols.iPRICE] as Number
-                            val lPurchased = columns[ShoppingListsSchema.Cols.lPURCHASED] as Boolean
-                            return ShoppingList(iId.toInt(), cItem, iCount.toInt(), cStore, iPrice.toInt(), lPurchased)
+                            return ShoppingList(iId.toInt(), null, null, cStore, null, null)
                         }
                     })
             }
@@ -101,7 +97,7 @@ class ListsPersistence(private val dbHelper: DBHelper) {
         }
     }
 
-    fun addChildItem(list: ShoppingList): ShoppingList? {
+    fun addChildItem(list: ShoppingList): List<ShoppingList>? {
         return dbHelper.use {
             try {
                 insertOrThrow(
@@ -119,11 +115,11 @@ class ListsPersistence(private val dbHelper: DBHelper) {
         }
     }
 
-    fun itemInListWith(itemName: String): ShoppingList? {
+    fun itemInListWith(itemName: String): List<ShoppingList>? {
         return dbHelper.use {
             select(ShoppingListsSchema.TABLE_NAME)
                 .whereSimple("${ShoppingListsSchema.Cols.cITEM} = ? ", itemName)
-                .parseSingle(object: MapRowParser<ShoppingList>{
+                .parseList(object: MapRowParser<ShoppingList>{
                     override fun parseRow(columns: Map<String, Any?>): ShoppingList {
                         val iID = columns[ShoppingListsSchema.Cols.iID] as Number
                         val cItem = columns[ShoppingListsSchema.Cols.cITEM] as String

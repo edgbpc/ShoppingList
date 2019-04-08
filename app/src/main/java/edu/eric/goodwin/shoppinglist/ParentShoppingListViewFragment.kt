@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
+import kotlinx.android.synthetic.main.fragment_dialog.*
 import kotlinx.android.synthetic.main.fragment_parent.*
 
 
@@ -38,8 +39,8 @@ class ParentShoppingListViewFragment: Fragment() {
 
         fab.setOnClickListener { view ->
             val fm = getActivity()!!.supportFragmentManager
-            val dialogFragment = dialogBox()
-            dialogFragment.show(fm, "dialog_box_call_from_parent")
+            val dialogBoxFragment = dialogBoxFragment()
+            dialogBoxFragment.show(fm, "dialog_box_call_from_parent")
 
         }
 
@@ -88,7 +89,7 @@ class ParentShoppingListViewFragment: Fragment() {
                         ?.replace(R.id.fragmentContainer, childShoppingListViewFragment!!)
                         ?.addToBackStack(null)
                         ?.commit()
-            }
+                }
 
             }
 
