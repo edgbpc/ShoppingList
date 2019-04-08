@@ -95,7 +95,7 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
 
     fun deleteParentList(deleteList: ShoppingList) {
         dbHelper.use {
-            delete(ShoppingListsSchema.TABLE_NAME, "${ShoppingListsSchema.Cols.iID} = ?", arrayOf(deleteList.iId.toString()))
+            delete(ShoppingListsSchema.TABLE_NAME, "${ShoppingListsSchema.Cols.cSTORE} = ?", arrayOf(deleteList.cStore.toString()))
         }
     }
 

@@ -64,13 +64,15 @@ class ChildShoppingListViewFragment: Fragment() {
         }
 
         override fun onBindViewHolder(holder: ChildListHolder, position: Int) {
-            holder.itemTextView.text = data.get(position).cItem
-            holder.qtyTextView.text = data.get(position).iCount.toString()
+            holder.itemTextView.text = "Item: " + data.get(position).cItem
+            holder.qtyTextView.text = "Quantity: " + data.get(position).iCount.toString()
+            holder.priceTextView.text = "$" + data.get(position).iPrice.toString()
         }
 
         inner class ChildListHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val itemTextView: TextView = itemView.findViewById(R.id.itemTitleView)
             val qtyTextView: TextView = itemView.findViewById(R.id.quantityTextView)
+            val priceTextView: TextView = itemView.findViewById(R.id.priceTextView)
 
         }
     }
