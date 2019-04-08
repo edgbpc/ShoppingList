@@ -15,13 +15,7 @@ class ShoppingListModel (context: Context) {
    //     persistence.createParentItemWith("Walmart")
 
         //putting some data in for testing
-//        persistence.addChildItem(ShoppingList(null, "Tacos", 5, "Walmart", 3))
-//        persistence.addChildItem(ShoppingList(null, "Beef", 3, "Trader Joes", 5))
-//        persistence.addChildItem(ShoppingList(null, "Pork", 5, "Trader joes", 3))
-//        persistence.addChildItem(ShoppingList(null, "Fish", 5, "Walmart", 6))
-//        persistence.addChildItem(ShoppingList(null, "Tissues", 1, "QT", 1))
-//        persistence.addChildItem(ShoppingList(null, "Iphone", 1, "BestBuy", 1000))
-//        persistence.addChildItem(ShoppingList(null, "TV", 5, "Amazon", 299))
+
 
 
         var _test: List<ShoppingList> = persistence.getParentLists()

@@ -36,20 +36,12 @@ class ParentShoppingListViewFragment: Fragment() {
 
         var data = model.persistence.getParentLists()
 
-
-      //  val dummyData: ArrayList<String> = ArrayList()
-
-//        for (i in 1..100){
-//            dummyData.add("dummyData " + i)
-//        }
-
         fab.setOnClickListener { view ->
             val fm = getActivity()!!.supportFragmentManager
             val dialogBoxFragment = dialogBoxFragment()
             dialogBoxFragment.show(fm, "dialog_box_call_from_parent")
 
         }
-
 
         parentShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
         parentShoppingListFragmentView.adapter = ParentListAdapter(data)
@@ -87,12 +79,6 @@ class ParentShoppingListViewFragment: Fragment() {
 
                 val position = parentShoppingListFragmentView.getChildLayoutPosition(this.view)
                 val newListTerm = data.get(position).cStore
-//
-//                val refinedData = model.persistence.shoppingListFor(stuff!!)
-//
-//                parentShoppingListFragmentView.adapter = ParentListAdapter(refinedData!!)
-
-
 
                 childShoppingListViewFragment = getActivity()?.supportFragmentManager?.findFragmentById(R.id.fragmentContainer) as? ChildShoppingListViewFragment
 
@@ -112,6 +98,7 @@ class ParentShoppingListViewFragment: Fragment() {
     }
 
     //bad
+    // not sure happy with this solution
 
     fun setRecyclerViewItemTouchListener(data: List<ShoppingList>) {
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -121,8 +108,9 @@ class ParentShoppingListViewFragment: Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int){
                 val position = viewHolder.adapterPosition
-          //      data.removeAt(position)
-                parentShoppingListFragmentView.adapter!!.notifyItemRemoved(position)
+                model.persistence.deleteParentList(data[position])
+                var refreshData = model.persistence.getParentLists()
+                parentShoppingListFragmentView.adapter = ParentListAdapter(refreshData)
 
 
             }

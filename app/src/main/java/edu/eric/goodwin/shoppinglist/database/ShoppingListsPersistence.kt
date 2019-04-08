@@ -99,6 +99,12 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
         }
     }
 
+    fun deleteChildItem(deleteList: ShoppingList) {
+        dbHelper.use {
+            delete(ShoppingListsSchema.TABLE_NAME, "${ShoppingListsSchema.Cols.iID} = ?", arrayOf(deleteList.iId.toString()))
+        }
+    }
+
     fun addChildItem(list: ShoppingList): List<ShoppingList>? {
         return dbHelper.use {
             try {
