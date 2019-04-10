@@ -118,9 +118,8 @@ class ParentShoppingListViewFragment: Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int){
                 val position = viewHolder.adapterPosition
-                model.persistence.deleteParentList(data[position])
-                var refreshData = model.persistence.getParentLists()
-                parentShoppingListFragmentView.adapter = ParentListAdapter(refreshData)
+                (ShoppingListModel(getActivity()!!).persistence.deleteParentList(ShoppingListModel(getActivity()!!).persistence.getParentLists()[position]))
+                parentShoppingListFragmentView.adapter = ParentListAdapter(ShoppingListModel(getActivity()!!).persistence.getParentLists())
 
 
             }

@@ -16,9 +16,6 @@ class ChildShoppingListViewFragment: Fragment() {
 
     var data: String = String()
 
-    private lateinit var model: ShoppingListModel
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_child, container, false)
@@ -28,16 +25,8 @@ class ChildShoppingListViewFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        model = ShoppingListModel(getActivity()!!)
 
-        var data = model.persistence.shoppingListFor(data)
-
-
-//        val moreDummyData: ArrayList<String> = ArrayList()
-//
-//        for (i in 1..100){
-//            moreDummyData.add("moreDummyData " + i)
-//        }
+        var displayData = (ShoppingListModel(getActivity()!!).persistence.shoppingListFor(data))
 
         childFab.setOnClickListener { view ->
             val fm = getActivity()!!.supportFragmentManager
@@ -47,8 +36,8 @@ class ChildShoppingListViewFragment: Fragment() {
         }
 
         childShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
-        childShoppingListFragmentView.adapter = ChildListAdapter(data!!)
-        setRecyclerViewItemTouchListener(data)
+        childShoppingListFragmentView.adapter = ChildListAdapter(displayData!!)
+        setRecyclerViewItemTouchListener(displayData!!)
 
     }
 
@@ -86,8 +75,8 @@ class ChildShoppingListViewFragment: Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int){
                 val position = viewHolder.adapterPosition
-                model.persistence.deleteChildItem(data[position])
-                var refreshData = model.persistence.shoppingListFor(data.get(position).cStore!!)
+                (ShoppingListModel(getActivity()!!).persistence.deleteChildItem(data[position]))
+                var refreshData = (ShoppingListModel(getActivity()!!).persistence.shoppingListFor(data.get(position).cStore!!))
                 childShoppingListFragmentView.adapter = ChildListAdapter(refreshData!!)
 
 
