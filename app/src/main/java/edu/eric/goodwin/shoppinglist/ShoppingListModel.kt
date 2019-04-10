@@ -14,13 +14,12 @@ class ShoppingListModel (context: Context) {
         persistence = ShoppingListsPersistence(dbHelper)
    //     persistence.createParentItemWith("Walmart")
 
-        //putting some data in for testing
 
 
-
-        var _test: List<ShoppingList> = persistence.getParentLists()
-        var _test2: List<ShoppingList>? = persistence.shoppingListFor("Walmart")
-        var _test3: List<ShoppingList>? = persistence.getAllLists()
+//
+//        var _test: List<ShoppingList> = persistence.getParentLists()
+//        var _test2: List<ShoppingList>? = persistence.shoppingListFor("Walmart")
+//        var _test3: List<ShoppingList>? = persistence.getAllLists()
 
         Log.d("persistence", "message")
     }

@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), ParentShoppingListViewFragment.Listene
     //    childShoppingListViewFragment?.listener = this
 
 
-       var _test1 = model.persistence.getAllLists()
+      // var _test1 = model.persistence.getAllLists()
 
         //populate some database data to test with
 //        model.persistence.addChildItem(ShoppingList(null, "Tacos", 5, "Walmart", 3))
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), ParentShoppingListViewFragment.Listene
 //        model.persistence.addChildItem(ShoppingList(null, "TV", 5, "Amazon", 299))
 
 
-
+      //  model.persistence.createParentItemWith("Taco Bell 2")
 
 
         parentShoppingListViewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as? ParentShoppingListViewFragment

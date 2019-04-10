@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.child_list_layout.*
 import kotlinx.android.synthetic.main.child_list_layout.view.*
 import kotlinx.android.synthetic.main.fragment_dialog.*
 import kotlinx.android.synthetic.main.fragment_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_parent.*
+import org.jetbrains.anko.sdk27.coroutines.textChangedListener
 
 class dialogBoxFragment: DialogFragment() {
 
@@ -29,12 +31,22 @@ class dialogBoxFragment: DialogFragment() {
 
 
         view.createButton.setOnClickListener {
-          super.dismiss()
+            var nameToSave = nameEditText.text
+            (ShoppingListModel(getActivity()!!).persistence.createParentItemWith(nameToSave.toString()))
+            Log.i("create button", nameToSave.toString())
+            // need to update list
+
+            super.dismiss()
+
         }
 
         view.cancelButton.setOnClickListener {
             Log.d("Cancel Button", "Cancel button pressed")
             super.dismiss()
+        }
+
+        view.nameEditText.textChangedListener {
+            var textToSave = nameEditText.text
         }
 
         if (this.tag == "dialog_box_call_from_parent") {
