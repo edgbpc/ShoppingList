@@ -55,18 +55,22 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
     }
 
     //returns a list of items for a parent
+    // only want results in child window if there are items in the list
     fun shoppingListFor(listName: String): List<ShoppingList>? {
             return dbHelper.use {
                 select(ShoppingListsSchema.TABLE_NAME)
-                    .whereSimple("${ShoppingListsSchema.Cols.cSTORE} = ?", listName)
+                    .whereSimple("${ShoppingListsSchema.Cols.cSTORE} = ? " +
+                            "AND ${ShoppingListsSchema.Cols.cITEM} NOT NULL " +
+                            "AND ${ShoppingListsSchema.Cols.iPRICE} NOT NULL " +
+                            "AND ${ShoppingListsSchema.Cols.iCOUNT} NOT NULL" , listName)
                     .parseList(object : MapRowParser<ShoppingList> {
                         override fun parseRow(columns: Map<String, Any?>): ShoppingList {
                             val iId = columns[ShoppingListsSchema.Cols.iID] as Number
-                            val cItem = columns.get(ShoppingListsSchema.Cols.cITEM) as? String
-                            val iCount = columns.get(ShoppingListsSchema.Cols.iCOUNT) as? Number
+                            val cItem = columns.get(ShoppingListsSchema.Cols.cITEM) as String
+                            val iCount = columns.get(ShoppingListsSchema.Cols.iCOUNT) as Number
                             val cStore = columns[ShoppingListsSchema.Cols.cSTORE] as? String
-                            val iPrice = columns.get(ShoppingListsSchema.Cols.iPRICE) as? Number
-                            return ShoppingList(iId.toInt(), cItem, iCount?.toInt(), cStore, iPrice?.toInt())
+                            val iPrice = columns.get(ShoppingListsSchema.Cols.iPRICE) as Number
+                            return ShoppingList(iId.toInt(), cItem, iCount.toInt(), cStore, iPrice.toInt())
                         }
                     })
             }
