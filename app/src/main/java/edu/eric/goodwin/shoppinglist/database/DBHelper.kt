@@ -4,16 +4,17 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import org.jetbrains.anko.db.*
+import org.w3c.dom.Text
 
 class DBHelper(context: Context): ManagedSQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     override fun onCreate(db: SQLiteDatabase?) {
         db?.createTable(ShoppingListsSchema.TABLE_NAME, true,
             ShoppingListsSchema.Cols.iID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
             ShoppingListsSchema.Cols.cITEM to TEXT,
-            ShoppingListsSchema.Cols.iCOUNT to INTEGER,
+            ShoppingListsSchema.Cols.iCOUNT to TEXT,
             ShoppingListsSchema.Cols.cSTORE to TEXT,
-            ShoppingListsSchema.Cols.iPRICE to INTEGER,
-            ShoppingListsSchema.Cols.lPURCHASED to INTEGER //0 false, 1 true
+            ShoppingListsSchema.Cols.iPRICE to TEXT,
+            ShoppingListsSchema.Cols.lPURCHASED to TEXT //0 false, 1 true
 
             )
     }

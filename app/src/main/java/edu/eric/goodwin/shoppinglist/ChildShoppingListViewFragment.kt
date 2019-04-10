@@ -31,7 +31,7 @@ class ChildShoppingListViewFragment: Fragment() {
         childFab.setOnClickListener { view ->
             val fm = getActivity()!!.supportFragmentManager
             val dialogFragment = dialogBoxFragment()
-            dialogFragment.show(fm, "dialog_box")
+            dialogFragment.show(fm, data.toString())
 
         }
 

@@ -25,19 +25,30 @@ class dialogBoxFragment: DialogFragment() {
 
 
         var qtyEditText = view.findViewById(R.id.QtyEditText) as EditText
-        var placeholderEditText = view.findViewById(R.id.placeholderEditText) as EditText
+        var priceEditText = view.findViewById(R.id.priceEditText) as EditText
 
         var nameEditText = view.findViewById(R.id.nameEditText) as EditText
 
 
         view.createButton.setOnClickListener {
-            var nameToSave = nameEditText.text
-            (ShoppingListModel(getActivity()!!).persistence.createParentItemWith(nameToSave.toString()))
-            Log.i("create button", nameToSave.toString())
-            // need to update list
 
-            super.dismiss()
+            if (this.tag == "dialog_box_call_from_parent") {
 
+
+                var nameToSave = nameEditText.text
+                (ShoppingListModel(getActivity()!!).persistence.createParentItemWith(nameToSave.toString()))
+                Log.i("create button", nameToSave.toString())
+                // need to update list
+
+                super.dismiss()
+            } else {
+                var nameToSave = nameEditText.text
+                var qtyToSave = qtyEditText.text
+                var priceToSave = priceEditText.text
+                (ShoppingListModel(getActivity()!!).persistence.addChildItem(ShoppingList(null, nameToSave.toString(), qtyToSave.toString(), this.tag, priceToSave.toString())))
+                super.dismiss()
+
+            }
         }
 
         view.cancelButton.setOnClickListener {
@@ -52,7 +63,7 @@ class dialogBoxFragment: DialogFragment() {
         if (this.tag == "dialog_box_call_from_parent") {
 
             qtyEditText.visibility = View.GONE
-            placeholderEditText.visibility = View.GONE
+            priceEditText.visibility = View.GONE
 
         } else {
             //do not need to do anything different

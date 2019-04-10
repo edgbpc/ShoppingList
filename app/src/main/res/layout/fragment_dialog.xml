@@ -19,11 +19,11 @@
                 android:text="@string/Quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/QtyEditText" android:layout_weight="1"
-                android:focusable="auto" android:editable="true"/>
+                android:focusable="auto" />
         <EditText
-                android:text="@string/placeholder"
+                android:text="@string/price"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/placeholderEditText" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/priceEditText" android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"

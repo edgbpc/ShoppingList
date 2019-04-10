@@ -11,4 +11,5 @@
     <string name="Cancel">Cancel</string>
     <string name="Create">Create</string>
     <string name="price">Price</string>
+    <string name="checkBox">Picked Up</string>
 </resources>

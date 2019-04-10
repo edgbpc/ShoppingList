@@ -39,9 +39,14 @@
             <TextView
                     android:text="@string/price"
                     android:id="@+id/priceTextView"
-                    android:layout_width="match_parent"
+                    android:layout_width="71dp"
                     android:layout_height="wrap_content"
-                    />
+            />
+            <CheckBox
+                    android:text="@string/checkBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox" android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
 
