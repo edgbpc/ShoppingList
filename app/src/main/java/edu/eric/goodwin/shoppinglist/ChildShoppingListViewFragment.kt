@@ -32,6 +32,7 @@ class ChildShoppingListViewFragment: Fragment() {
 
         var data = model.persistence.shoppingListFor(data)
 
+
 //        val moreDummyData: ArrayList<String> = ArrayList()
 //
 //        for (i in 1..100){

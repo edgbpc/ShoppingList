@@ -8,21 +8,33 @@ import com.google.android.material.snackbar.Snackbar
 import edu.eric.goodwin.shoppinglist.database.DBHelper
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ParentShoppingListViewFragment.Listener {
 
     companion object {
         const val PARENT_SHOP_LIST_FRAG_TAG = "ParentShoppingList"
         const val CHILD_SHOP_LIST_FRAG_TAG = "ChildShoppingList"
+
     }
 
     private var parentShoppingListViewFragment: ParentShoppingListViewFragment? = null
+    private var childShoppingListViewFragment: ChildShoppingListViewFragment? = null
     private lateinit var model: ShoppingListModel
+
+
+    override fun fabButtonPushed() {
+        val fm = supportFragmentManager
+        val dialogBoxFragment = dialogBoxFragment()
+        dialogBoxFragment.show(fm, "dialog_box_call_from_parent")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         model = ShoppingListModel(this)
+
+    //    childShoppingListViewFragment?.listener = this
+
 
        var _test1 = model.persistence.getAllLists()
 
@@ -46,6 +58,8 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.fragmentContainer, parentShoppingListViewFragment!!)
                 .commit()
         }
+
+        parentShoppingListViewFragment?.listener = this
 
 
 

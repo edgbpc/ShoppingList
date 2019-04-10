@@ -1,5 +1,6 @@
 package edu.eric.goodwin.shoppinglist
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,18 +11,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
+import edu.eric.goodwin.shoppinglist.database.ShoppingListsSchema
 import kotlinx.android.synthetic.main.fragment_dialog.*
 import kotlinx.android.synthetic.main.fragment_parent.*
 
 
 class ParentShoppingListViewFragment: Fragment() {
 
+    interface Listener{
+        fun fabButtonPushed()
+    }
+
+    var listener: Listener? = null
+
     private var childShoppingListViewFragment: ChildShoppingListViewFragment? = null
 
     private lateinit var model: ShoppingListModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
 
         val view = inflater.inflate(R.layout.fragment_parent, container, false)
         return view
@@ -32,20 +39,23 @@ class ParentShoppingListViewFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        model = ShoppingListModel(getActivity()!!)
+  //      model = ShoppingListModel(getActivity()!!)
 
-        var data = model.persistence.getParentLists()
+    //    var data = model.persistence.getParentLists()
+
+   //     data = ShoppingListModel(getActivity()!!).persistence.getParentLists()
 
         fab.setOnClickListener { view ->
-            val fm = getActivity()!!.supportFragmentManager
-            val dialogBoxFragment = dialogBoxFragment()
-            dialogBoxFragment.show(fm, "dialog_box_call_from_parent")
+            listener?.fabButtonPushed()
+//            val fm = getActivity()!!.supportFragmentManager
+//            val dialogBoxFragment = dialogBoxFragment()
+//            dialogBoxFragment.show(fm, "dialog_box_call_from_parent")
 
         }
 
         parentShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
-        parentShoppingListFragmentView.adapter = ParentListAdapter(data)
-        setRecyclerViewItemTouchListener(data)
+        parentShoppingListFragmentView.adapter = ParentListAdapter(ShoppingListModel(getActivity()!!).persistence.getParentLists())
+        setRecyclerViewItemTouchListener(ShoppingListModel(getActivity()!!).persistence.getParentLists())
     }
 
     inner class ParentListAdapter(val data: List<ShoppingList>): RecyclerView.Adapter<ParentListAdapter.ParentListHolder>() {

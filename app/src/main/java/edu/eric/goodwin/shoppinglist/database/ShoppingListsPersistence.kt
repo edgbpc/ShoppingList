@@ -85,11 +85,11 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
 
                .parseList(object: MapRowParser<ShoppingList> {
                     override fun parseRow(columns: Map<String, Any?>): ShoppingList {
-                        val iId = columns[ShoppingListsSchema.Cols.iID] as Number
                         val cStore = columns[ShoppingListsSchema.Cols.cSTORE] as String
-                        return ShoppingList(iId.toInt(), null, null, cStore, null)
+                        return ShoppingList(null, null, null, cStore, null)
                     }
                 })
+                .distinct()
         }
     }
 
