@@ -1,6 +1,7 @@
 package edu.eric.goodwin.shoppinglist
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,11 +27,11 @@ class ChildShoppingListViewFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var displayData = (ShoppingListModel(getActivity()!!).persistence.shoppingListFor(data))
+        var displayData = (ShoppingListModel(activity!!).persistence.shoppingListFor(data))
 
         childFab.setOnClickListener { view ->
-            val fm = getActivity()!!.supportFragmentManager
-            val dialogFragment = dialogBoxFragment()
+            val fm = activity!!.supportFragmentManager
+            val dialogFragment = DialogBoxFragment()
             dialogFragment.show(fm, data.toString())
 
         }
@@ -59,10 +60,26 @@ class ChildShoppingListViewFragment: Fragment() {
             holder.priceTextView.text = "$" + data.get(position).iPrice.toString()
         }
 
-        inner class ChildListHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        inner class ChildListHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener  {
+            private var view: View = itemView
+
+
             val itemTextView: TextView = itemView.findViewById(R.id.itemTitleView)
             val qtyTextView: TextView = itemView.findViewById(R.id.quantityTextView)
             val priceTextView: TextView = itemView.findViewById(R.id.priceTextView)
+
+            init {
+                itemView.setOnClickListener(this)
+
+            }
+
+            override fun onClick(v: View?) {
+                Log.i("onclick", "onCLick clicked")
+                val position = childShoppingListFragmentView.getChildLayoutPosition(this.view)
+                val fm = activity!!.supportFragmentManager
+                val editDialogBoxFragment = EditBoxFragment()
+                editDialogBoxFragment.show(fm, data[position].iId.toString())
+            }
 
         }
     }
@@ -75,8 +92,8 @@ class ChildShoppingListViewFragment: Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int){
                 val position = viewHolder.adapterPosition
-                (ShoppingListModel(getActivity()!!).persistence.deleteChildItem(data[position]))
-                var refreshData = (ShoppingListModel(getActivity()!!).persistence.shoppingListFor(data.get(position).cStore!!))
+                (ShoppingListModel(activity!!).persistence.deleteChildItem(data[position]))
+                var refreshData = (ShoppingListModel(activity!!).persistence.shoppingListFor(data.get(position).cStore!!))
                 childShoppingListFragmentView.adapter = ChildListAdapter(refreshData!!)
 
 

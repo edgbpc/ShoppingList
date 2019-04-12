@@ -1,11 +1,8 @@
 package edu.eric.goodwin.shoppinglist
 
 import android.os.Bundle
-import android.view.View
 
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import edu.eric.goodwin.shoppinglist.database.DBHelper
 
 
 class MainActivity : AppCompatActivity(), ParentShoppingListViewFragment.Listener {
@@ -23,7 +20,7 @@ class MainActivity : AppCompatActivity(), ParentShoppingListViewFragment.Listene
 
     override fun fabButtonPushed() {
         val fm = supportFragmentManager
-        val dialogBoxFragment = dialogBoxFragment()
+        val dialogBoxFragment = DialogBoxFragment()
         dialogBoxFragment.show(fm, "dialog_box_call_from_parent")
     }
 

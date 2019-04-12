@@ -34,28 +34,18 @@ class ParentShoppingListViewFragment: Fragment() {
         return view
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-  //      model = ShoppingListModel(getActivity()!!)
 
-    //    var data = model.persistence.getParentLists()
-
-   //     data = ShoppingListModel(getActivity()!!).persistence.getParentLists()
 
         fab.setOnClickListener { view ->
             listener?.fabButtonPushed()
-//            val fm = getActivity()!!.supportFragmentManager
-//            val dialogBoxFragment = dialogBoxFragment()
-//            dialogBoxFragment.show(fm, "dialog_box_call_from_parent")
-
         }
 
         parentShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
-        parentShoppingListFragmentView.adapter = ParentListAdapter(ShoppingListModel(getActivity()!!).persistence.getParentLists())
-        setRecyclerViewItemTouchListener(ShoppingListModel(getActivity()!!).persistence.getParentLists())
+        parentShoppingListFragmentView.adapter = ParentListAdapter(ShoppingListModel(activity!!).persistence.getParentLists())
+        setRecyclerViewItemTouchListener(ShoppingListModel(activity!!).persistence.getParentLists())
     }
 
     inner class ParentListAdapter(val data: List<ShoppingList>): RecyclerView.Adapter<ParentListAdapter.ParentListHolder>() {
@@ -118,8 +108,8 @@ class ParentShoppingListViewFragment: Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int){
                 val position = viewHolder.adapterPosition
-                (ShoppingListModel(getActivity()!!).persistence.deleteParentList(ShoppingListModel(getActivity()!!).persistence.getParentLists()[position]))
-                parentShoppingListFragmentView.adapter = ParentListAdapter(ShoppingListModel(getActivity()!!).persistence.getParentLists())
+                (ShoppingListModel(activity!!).persistence.deleteParentList(ShoppingListModel(activity!!).persistence.getParentLists()[position]))
+                parentShoppingListFragmentView.adapter = ParentListAdapter(ShoppingListModel(activity!!).persistence.getParentLists())
 
 
             }

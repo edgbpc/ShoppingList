@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/EditDialogFragment"
+
+>
+
+    <EditText
+            android:text="@string/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/nameEditText" android:focusable="auto"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+                android:text="@string/Quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/QtyEditText" android:layout_weight="1"
+                android:focusable="auto" />
+        <EditText
+                android:text="@string/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/priceEditText" android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <Button
+                android:text="@string/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/editEditButton" android:layout_weight="1"/>
+        <Button
+                android:text="@string/Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/editCancelButton" android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>
