@@ -6,28 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.child_list_layout.*
-import kotlinx.android.synthetic.main.child_list_layout.view.*
-import kotlinx.android.synthetic.main.fragment_dialog.*
 import kotlinx.android.synthetic.main.fragment_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_parent.*
-import org.jetbrains.anko.sdk27.coroutines.textChangedListener
 
-class dialogBoxFragment: DialogFragment() {
+class DialogBoxFragment: DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_dialog, container)
 
 
 
-        var qtyEditText = view.findViewById(R.id.QtyEditText) as EditText
-        var priceEditText = view.findViewById(R.id.priceEditText) as EditText
-
-        var nameEditText = view.findViewById(R.id.nameEditText) as EditText
+        val qtyEditText = view.findViewById(R.id.QtyEditText) as EditText
+        val priceEditText = view.findViewById(R.id.priceEditText) as EditText
+        val nameEditText = view.findViewById(R.id.nameEditText) as EditText
 
 
         view.createButton.setOnClickListener {
@@ -35,18 +26,20 @@ class dialogBoxFragment: DialogFragment() {
             if (this.tag == "dialog_box_call_from_parent") {
 
 
-                var nameToSave = nameEditText.text
-                (ShoppingListModel(getActivity()!!).persistence.createParentItemWith(nameToSave.toString()))
+                val nameToSave = nameEditText.text
+                (ShoppingListModel(context!!).persistence.createParentItemWith(nameToSave.toString()))
                 Log.i("create button", nameToSave.toString())
                 // need to update list
 
-                super.dismiss()
+                dismiss()
+
             } else {
-                var nameToSave = nameEditText.text
-                var qtyToSave = qtyEditText.text
-                var priceToSave = priceEditText.text
-                (ShoppingListModel(getActivity()!!).persistence.addChildItem(ShoppingList(null, nameToSave.toString(), qtyToSave.toString(), this.tag, priceToSave.toString())))
-                super.dismiss()
+
+                val nameToSave = nameEditText.text
+                val qtyToSave = qtyEditText.text
+                val priceToSave = priceEditText.text
+                (ShoppingListModel(context!!).persistence.addChildItem(ShoppingList(null, nameToSave.toString(), qtyToSave.toString(), this.tag, priceToSave.toString())))
+                dismiss()
 
             }
         }
@@ -56,18 +49,13 @@ class dialogBoxFragment: DialogFragment() {
             super.dismiss()
         }
 
-        view.nameEditText.textChangedListener {
-            var textToSave = nameEditText.text
-        }
-
         if (this.tag == "dialog_box_call_from_parent") {
 
             qtyEditText.visibility = View.GONE
             priceEditText.visibility = View.GONE
 
-        } else {
-            //do not need to do anything different
-            //layout contains all fields otherwise
+        }else {
+            //do nothing different
         }
         return view
     }

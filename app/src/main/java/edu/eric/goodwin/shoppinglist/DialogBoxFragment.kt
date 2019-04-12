@@ -1,7 +1,6 @@
 package edu.eric.goodwin.shoppinglist
 
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +31,7 @@ class DialogBoxFragment: DialogFragment() {
                 Log.i("create button", nameToSave.toString())
                 // need to update list
 
-                super.dismiss()
+                dismiss()
 
             } else {
 
@@ -40,7 +39,7 @@ class DialogBoxFragment: DialogFragment() {
                 val qtyToSave = qtyEditText.text
                 val priceToSave = priceEditText.text
                 (ShoppingListModel(context!!).persistence.addChildItem(ShoppingList(null, nameToSave.toString(), qtyToSave.toString(), this.tag, priceToSave.toString())))
-                super.dismiss()
+                dismiss()
 
             }
         }
