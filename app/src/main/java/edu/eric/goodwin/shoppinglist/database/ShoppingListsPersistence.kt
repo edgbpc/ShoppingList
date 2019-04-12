@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteConstraintException
 import edu.eric.goodwin.shoppinglist.ShoppingList
 import kotlinx.coroutines.selects.select
 import org.jetbrains.anko.db.MapRowParser
+import org.jetbrains.anko.db.SqlOrderDirection
 import org.jetbrains.anko.db.insertOrThrow
 import org.jetbrains.anko.db.select
 
@@ -81,6 +82,7 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
         return dbHelper.use {
             select(ShoppingListsSchema.TABLE_NAME)
                 .whereSimple("${ShoppingListsSchema.Cols.iID} = ?", listId.toString())
+                .orderBy("iID", SqlOrderDirection.DESC)
                 .parseSingle(object : MapRowParser<ShoppingList> {
                     override fun parseRow(columns: Map<String, Any?>): ShoppingList {
                         val iId = columns[ShoppingListsSchema.Cols.iID] as Number
@@ -100,14 +102,16 @@ class ShoppingListsPersistence(private val dbHelper: DBHelper) {
     fun getParentLists(): List<ShoppingList> {
         return dbHelper.use {
             select(ShoppingListsSchema.TABLE_NAME)
-
-               .parseList(object: MapRowParser<ShoppingList> {
+               .orderBy("iID", SqlOrderDirection.DESC)
+               .parseList(object: MapRowParser<ShoppingList>     {
                     override fun parseRow(columns: Map<String, Any?>): ShoppingList {
                         val cStore = columns[ShoppingListsSchema.Cols.cSTORE] as String
                         return ShoppingList(null, null, null, cStore, null)
                     }
                 })
                 .distinct()
+
+
         }
     }
 

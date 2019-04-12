@@ -3,6 +3,7 @@ package edu.eric.goodwin.shoppinglist
 import android.os.Bundle
 
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.fragment_parent.*
 
 
 class MainActivity : AppCompatActivity(), ParentShoppingListViewFragment.Listener {
@@ -13,8 +14,7 @@ class MainActivity : AppCompatActivity(), ParentShoppingListViewFragment.Listene
 
     }
 
-    private var parentShoppingListViewFragment: ParentShoppingListViewFragment? = null
-    private var childShoppingListViewFragment: ChildShoppingListViewFragment? = null
+    var parentShoppingListViewFragment: ParentShoppingListViewFragment? = null
     private lateinit var model: ShoppingListModel
 
 
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), ParentShoppingListViewFragment.Listene
         val fm = supportFragmentManager
         val dialogBoxFragment = DialogBoxFragment()
         dialogBoxFragment.show(fm, "dialog_box_call_from_parent")
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

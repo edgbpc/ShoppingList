@@ -40,6 +40,8 @@ class ChildShoppingListViewFragment: Fragment() {
         childShoppingListFragmentView.adapter = ChildListAdapter(displayData!!)
         setRecyclerViewItemTouchListener(displayData!!)
 
+
+
     }
 
     inner class ChildListAdapter(val data: List<ShoppingList>): RecyclerView.Adapter<ChildListAdapter.ChildListHolder>() {

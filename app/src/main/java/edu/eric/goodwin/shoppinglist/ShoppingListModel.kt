@@ -28,7 +28,7 @@ class ShoppingListModel (context: Context) {
 
         persistence.createParentItemWith("Walmart")
 
-        var _test: List<ShoppingList> = persistence.getParentLists()
+      //  var _test: List<ShoppingList> = persistence.getParentLists()
 
     }
 

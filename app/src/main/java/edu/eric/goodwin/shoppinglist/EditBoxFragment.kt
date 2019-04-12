@@ -30,6 +30,7 @@ class EditBoxFragment: DialogFragment() {
             ShoppingListModel(context!!).persistence.deleteChildItem(data)
             //add new list
             ShoppingListModel(context!!).persistence.addChildItem(ShoppingList(null, nameEditText.text.toString(), qtyEditText.text.toString(), data!!.cStore, priceEditText.text.toString()))
+
             super.dismiss()
         }
 

@@ -1,6 +1,7 @@
 package edu.eric.goodwin.shoppinglist
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,28 +27,38 @@ class ParentShoppingListViewFragment: Fragment() {
 
     private var childShoppingListViewFragment: ChildShoppingListViewFragment? = null
 
-    private lateinit var model: ShoppingListModel
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_parent, container, false)
         return view
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+
+
+        parentShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
+        parentShoppingListFragmentView.adapter =
+            ParentListAdapter(ShoppingListModel(activity!!).persistence.getParentLists())
+        setRecyclerViewItemTouchListener(ShoppingListModel(activity!!).persistence.getParentLists())
 
 
         fab.setOnClickListener { view ->
             listener?.fabButtonPushed()
         }
 
-        parentShoppingListFragmentView.layoutManager = LinearLayoutManager(this.activity)
-        parentShoppingListFragmentView.adapter = ParentListAdapter(ShoppingListModel(activity!!).persistence.getParentLists())
-        setRecyclerViewItemTouchListener(ShoppingListModel(activity!!).persistence.getParentLists())
-    }
+        fun refreshData() {
+            parentShoppingListFragmentView.adapter =
+                ParentListAdapter(ShoppingListModel(activity!!).persistence.getParentLists())
+        }
 
+        view.viewTreeObserver.addOnWindowFocusChangeListener { hasFocus -> parentShoppingListFragmentView.adapter =
+            ParentListAdapter(ShoppingListModel(activity!!).persistence.getParentLists()) }
+
+
+    }
     inner class ParentListAdapter(val data: List<ShoppingList>): RecyclerView.Adapter<ParentListAdapter.ParentListHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParentListHolder {
@@ -97,9 +108,6 @@ class ParentShoppingListViewFragment: Fragment() {
 
     }
 
-    //bad
-    // not sure happy with this solution
-
     fun setRecyclerViewItemTouchListener(data: List<ShoppingList>) {
         val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove( recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
@@ -110,14 +118,13 @@ class ParentShoppingListViewFragment: Fragment() {
                 val position = viewHolder.adapterPosition
                 (ShoppingListModel(activity!!).persistence.deleteParentList(ShoppingListModel(activity!!).persistence.getParentLists()[position]))
                 parentShoppingListFragmentView.adapter = ParentListAdapter(ShoppingListModel(activity!!).persistence.getParentLists())
-
-
             }
         }
         val itemTouchHelper = ItemTouchHelper(itemTouchCallback)
         itemTouchHelper.attachToRecyclerView(parentShoppingListFragmentView)
 
     }
+
 
 
 }
